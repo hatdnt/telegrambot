@@ -1,7 +1,0 @@
-# /usr/share/telegrambot/run_bot.py
-
-import asyncio
-from src.bot import main
-
-if __name__ == '__main__':
-    asyncio.run(main())
