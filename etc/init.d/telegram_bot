@@ -1,0 +1,26 @@
+#!/bin/sh /etc/rc.common
+
+START=99
+STOP=10
+
+BOT_PATH="/usr/share/telegrambot/run_bot.py"
+PYTHON_PATH="/usr/bin/python3"  # Sesuaikan dengan lokasi Python Anda jika berbeda
+
+start() {
+    echo "Starting Telegram bot..."
+    $PYTHON_PATH $BOT_PATH &
+    echo $! > /var/run/telegram_bot.pid
+}
+
+stop() {
+    echo "Stopping Telegram bot..."
+    if [ -f /var/run/telegram_bot.pid ]; then
+        kill $(cat /var/run/telegram_bot.pid)
+        rm /var/run/telegram_bot.pid
+    fi
+}
+
+restart() {
+    stop
+    start
+}

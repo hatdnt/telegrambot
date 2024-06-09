@@ -1,0 +1,4 @@
+2024-06-10 01:35:34 - src.bot - INFO - Memulai bot...
+2024-06-10 01:35:36 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7323397448:AAEDTP8CrUCYuofwO0DLaYRvHBUtvPszjis/getMe "HTTP/1.1 200 OK"
+2024-06-10 01:35:36 - telegram.ext.Application - INFO - Application started
+2024-06-10 01:35:36 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7323397448:AAEDTP8CrUCYuofwO0DLaYRvHBUtvPszjis/deleteWebhook "HTTP/1.1 200 OK"

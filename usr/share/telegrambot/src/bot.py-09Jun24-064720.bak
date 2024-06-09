@@ -1,0 +1,54 @@
+import logging
+from logging.handlers import RotatingFileHandler
+from telegram.ext import ApplicationBuilder, CommandHandler
+from .config import BOT_TOKEN
+from .plugins.start import start
+from .plugins.info import info
+from .plugins.sysinfo import sysinfo
+from .plugins.modeminfo import modeminfo
+
+class LineLimitFileHandler(RotatingFileHandler):
+    def __init__(self, filename, max_lines=300, *args, **kwargs):
+        super().__init__(filename, *args, **kwargs)
+        self.max_lines = max_lines
+
+    def emit(self, record):
+        super().emit(record)
+        self._enforce_line_limit()
+
+    def _enforce_line_limit(self):
+        with open(self.baseFilename, 'r') as f:
+            lines = f.readlines()
+        
+        if len(lines) > self.max_lines:
+            with open(self.baseFilename, 'w') as f:
+                f.writelines(lines[-self.max_lines:])
+
+def main() -> None:
+    # Konfigurasi logging
+    log_filename = '/usr/share/telegrambot/logs/bot.log'
+    log_handler = LineLimitFileHandler(log_filename, max_lines=300, mode='a', encoding='utf-8')
+    logging.basicConfig(
+        level=logging.INFO,
+        handlers=[log_handler],
+        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+        datefmt='%Y-%m-%d %H:%M:%S'
+    )
+    logger = logging.getLogger(__name__)
+
+    logger.info("Memulai bot...")
+
+    # Buat Aplikasi dan berikan token bot Anda.
+    application = ApplicationBuilder().token(BOT_TOKEN).build()
+
+    # pada perintah yang berbeda - jawab di Telegram
+    application.add_handler(CommandHandler("start", start))
+    application.add_handler(CommandHandler("info", info))
+    application.add_handler(CommandHandler("sysinfo", sysinfo))
+    application.add_handler(CommandHandler("modeminfo", modeminfo))
+
+    # Mulai Bot
+    application.run_polling()
+
+if __name__ == '__main__':
+    main()
