@@ -10,7 +10,7 @@ from .plugins.modeminfo import modeminfo
 def main() -> None:
     # Konfigurasi logging
     log_filename = '/usr/share/telegrambot/logs/bot.log'
-    log_handler = LineLimitFileHandler(log_filename, max_lines=300, mode='a', encoding='utf-8')
+    log_handler = LineLimitFileHandler(log_filename, max_lines=100, mode='a', encoding='utf-8')
     logging.basicConfig(
         level=logging.INFO,
         handlers=[log_handler],
