@@ -1,7 +1,7 @@
 import logging
 from telegram.ext import ApplicationBuilder, CommandHandler
 from .config import BOT_TOKEN
-from .line_limit_file_handler import LineLimitFileHandler  # Impor dari file baru
+from .handlers.line_limit_file_handler import LineLimitFileHandler  # Impor dari file baru
 from .plugins.start import start
 from .plugins.info import info
 from .plugins.sysinfo import sysinfo
@@ -10,7 +10,7 @@ from .plugins.modeminfo import modeminfo
 def main() -> None:
     # Konfigurasi logging
     log_filename = '/usr/share/telegrambot/logs/bot.log'
-    log_handler = LineLimitFileHandler(log_filename, max_lines=100, mode='a', encoding='utf-8')
+    log_handler = LineLimitFileHandler(log_filename, max_lines=300, mode='a', encoding='utf-8')
     logging.basicConfig(
         level=logging.INFO,
         handlers=[log_handler],
