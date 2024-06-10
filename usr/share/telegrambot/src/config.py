@@ -1,3 +1,3 @@
 # /usr/share/telegrambot/src/config.py
 
-BOT_TOKEN = "7323397448:AAEDTP8CrUCYuofwO0DLaYRvHBUtvPszjis"
+BOT_TOKEN = "ISI TOKEN TELEGRAM"
