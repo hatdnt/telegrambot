@@ -6,6 +6,10 @@ from .plugins.start import start
 from .plugins.info import info
 from .plugins.sysinfo import sysinfo
 from .plugins.modeminfo import modeminfo
+from .plugins.vnstat import vnstat
+from .plugins.proxies import proxies
+from .plugins.upload import upload_handler
+from .plugins.download import download_handler
 
 def main() -> None:
     # Konfigurasi logging
@@ -29,6 +33,10 @@ def main() -> None:
     application.add_handler(CommandHandler("info", info))
     application.add_handler(CommandHandler("sysinfo", sysinfo))
     application.add_handler(CommandHandler("modeminfo", modeminfo))
+    application.add_handler(CommandHandler("vnstat", vnstat))
+    application.add_handler(CommandHandler("proxies", proxies))
+    application.add_handler(upload_handler)
+    application.add_handler(download_handler)
 
     # Jalankan bot dengan polling
     logger.info("Bot sedang berjalan. Tekan Ctrl+C untuk menghentikan.")
